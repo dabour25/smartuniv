@@ -1,0 +1,14 @@
+.p{     
+    color: orange;
+    font-weight: bold;
+    font-size: 22px;
+}
+.q{ font-size: 18px;
+    background-color: white;
+    text-align: center;
+}
+.textarea{ margin-left: 100px;
+    width: 600px;
+     border: gray solid 1px;
+     height: 300px;
+ }

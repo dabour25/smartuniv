@@ -1,0 +1,173 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    font-family: monospace;
+}
+.row
+{
+    max-width: 1200px;
+    margin: auto;
+}
+
+.main-nav
+{
+    float: right;
+    list-style: none;
+    margin-top: 30px;
+}
+.main-nav li
+{
+    display: inline-block;
+}
+
+.main-nav li.active a
+{
+    border: 1px solid white;
+    
+}
+
+.main-nav li a:hover
+{
+    border: 1px solid white;
+}
+
+
+.main-nav li a
+{
+    color: white;
+    text-decoration: none;
+    padding: 5px 20px;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+}
+
+.hero
+{
+    position: absolute;
+    width: 1200px;
+    margin-left: 0px;
+    margin-top: 0px;
+    
+}
+
+
+.mtitle
+{
+    color: white;
+    text-transform: uppercase;
+    font-size: 50px;
+    text-align: center;
+    margin-left:30%;
+    margin-top: 150px;
+    
+}
+.stitle
+{
+    color: white;
+    text-transform: uppercase;
+    font-size: 30px;
+    text-align: center;
+    margin-left: 130px;
+    
+}
+header
+{
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+.button
+{
+    margin-top: 30px;
+    margin-left: 440px;
+}
+
+.btn
+{
+    border: 1px solid white;
+    padding: 10px 30px;
+    color: white;
+    text-decoration: none;
+    margin-right: 5px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+.btn-one
+{
+    background-color: darkorange;
+    font-family: "Roboto", sans-serif;
+}
+
+.btn-two
+{
+    font-family: "Roboto", sans-serif;
+}
+
+
+.btn-two:hover
+{
+    background-color: darkorange;
+    transition: all 0.5s ease-in;
+    
+        
+}
+
+.logo img
+{
+    height: auto;
+    width:60px;
+    padding-top: 10px;
+}
+
+.tab{
+    margin:15px 10%;
+    border:solid;
+    border-color:#bd7620;
+    border-size:6px;
+    border-radius:5px;
+    background-color:#130b01;
+    transition-duration: 2s;
+    overflow: hidden;
+    box-shadow: 2px 2px 1px black;
+}
+.tab .tab_words{
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+    color:#e47d00;
+    font-size:22px;
+    font-family:Bell MT Italic;
+    cursor:default;
+    padding:2px;
+}
+
+@keyframes marquee {
+    0% {
+        margin-left: 100%;
+        margin-right: -1800px;
+    }
+    100% {
+        margin-left:-1800px;
+        margin-right:0%;
+    }
+}
+
+.tab .tab_words:hover {
+    animation-play-state: paused;
+    color:#e1ddc7;
+}
+
+.pagetitle{
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+
+.clabel{
+    color: white;
+    font-size: 22px;
+}

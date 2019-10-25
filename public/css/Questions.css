@@ -1,0 +1,30 @@
+.sec-1{
+margin-left: 200px;
+width: 400px;
+}
+.p{  margin-left: 200px;   
+    color: orange;
+    font-weight: bold;
+    font-size: 20px;
+}
+.sec-2{ margin-left: 200px;
+    width: 300px;
+}
+.card{ 
+   background-color:white;
+}
+.mb-0{ text-align: center;
+    background-color: white;
+}
+.bbtn{
+    color: black;
+}
+.bbtn:hover{
+    text-decoration-line: none;
+    color: rgba(0, 0, 0, 0.432);
+}
+.pp{
+    color: orange;
+    font-weight: bold;
+    font-size: 20px;
+}

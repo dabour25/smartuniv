@@ -1,0 +1,29 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    width: 350px;
+    padding-left: 10px;
+    background-color: rgba(255, 228, 196, 0.151);
+    margin-left: 300px;
+  }
+  .checked {
+    color: gold;
+  }
+  .p{   
+    color: orange;
+    font-weight: bold;
+    font-size: 22px;
+}
+.sec-2{ 
+    width: 300px;
+}
+.info{
+  color: orange;
+  font-weight: bold;
+  font-size: 20px;
+}
+.p-info{
+  font-weight: bold;
+  font-size: 18px;
+}
