@@ -14,8 +14,15 @@ class CreateMessagesTable extends Migration
     public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->charset = 'utf8';
+			$table->collation = 'utf8_unicode_ci';
+            $table->bigIncrements('id');
+			$table->string('name',50);
+			$table->string('email',60);
+			$table->string('subject',60);
+			$table->text('message');
+			$table->tinyInteger('seen', false, true)->default(0);
+            $table->timestamp('date')->useCurrent();
         });
     }
 

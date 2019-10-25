@@ -14,8 +14,16 @@ class CreateDoctorDataTable extends Migration
     public function up()
     {
         Schema::create('doctor_data', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->charset = 'utf8';
+			$table->collation = 'utf8_unicode_ci';
+            $table->bigIncrements('id');
+			$table->text('courses');
+			$table->float('evaluation',2,1)->default(5.0);
+			$table->bigInteger('doctor_id', false, true);
+			$table->bigInteger('department_id', false, true);
+			
+			$table->foreign('doctor_id')->references('id')->on('users');
+			$table->foreign('department_id')->references('id')->on('departments');
         });
     }
 

@@ -17,10 +17,13 @@ class CreateAbsenceTable extends Migration
 			$table->charset = 'utf8';
 			$table->collation = 'utf8_unicode_ci';
             $table->bigIncrements('id');
+			$table->tinyInteger('week', false, true)->default(0);
 			$table->bigInteger('student_id', false, true);
-            $table->timestamps();
+			$table->bigInteger('schedule_id', false, true);
+            
 			
 			$table->foreign('student_id')->references('id')->on('users');
+			$table->foreign('schedule_id')->references('id')->on('course_schedule');
         });
     }
 

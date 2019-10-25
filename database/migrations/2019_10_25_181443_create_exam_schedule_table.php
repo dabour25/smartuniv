@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePreRequestTable extends Migration
+class CreateExamScheduleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,17 @@ class CreatePreRequestTable extends Migration
      */
     public function up()
     {
-        Schema::create('pre_request', function (Blueprint $table) {
+        Schema::create('exam_schedule', function (Blueprint $table) {
+            $table->charset = 'utf8';
+			$table->collation = 'utf8_unicode_ci';
             $table->bigIncrements('id');
+			$table->tinyInteger('level', false, true)->default(0);
+			$table->string('day',30);
+			$table->bigInteger('exam_period', false, true);
 			$table->bigInteger('course_id', false, true);
-			$table->bigInteger('prerequest_id', false, true);
             
-			$table->foreign('prerequest_id')->references('id')->on('courses');
+			
+			$table->foreign('exam_period')->references('id')->on('exam_periods');
 			$table->foreign('course_id')->references('id')->on('courses');
         });
     }
@@ -30,6 +35,6 @@ class CreatePreRequestTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pre_request');
+        Schema::dropIfExists('exam_schedule');
     }
 }
