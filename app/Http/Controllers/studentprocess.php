@@ -30,6 +30,9 @@ use App\Quizans;
 
 class studentprocess extends Controller
 {
+  public function __construct(){
+        $this->middleware('auth:student');
+  }
   public function register(Request $req){
       $sid=Auth::user()->id;
       $cou=$req->input('cou');

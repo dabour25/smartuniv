@@ -46,9 +46,9 @@
           <select class="form-control" name="acyear">
             @foreach($acyears as $v)
             @if($v->id==$syssta->ac_year)
-            <option value="{{$v->id}}" selected>{{$v->year}}</option>
+            <option value="{{$v->id}}" selected>{{$v->year}}||{{$v->semister}}</option>
             @else
-            <option value="{{$v->id}}">{{$v->year}}</option>
+            <option value="{{$v->id}}">{{$v->year}}||{{$v->semister}}</option>
             @endif
             @endforeach
           </select>

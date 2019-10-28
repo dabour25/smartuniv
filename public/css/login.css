@@ -1,0 +1,14 @@
+.body{
+	background:linear-gradient(#141414e0, #141414e0),url('../images/back.jpeg');
+	background-position: center;
+  	background-repeat: no-repeat;
+  	background-size: cover;
+}
+.form{
+	margin: 160px 30%;
+	padding-bottom: 20px;
+}
+.btn{
+	width: 100% !important;
+	height: 50px !important;
+}

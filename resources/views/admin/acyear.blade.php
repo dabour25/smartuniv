@@ -37,6 +37,8 @@
 	              <div class="form-Department">
 	                  <label for="group">Academic Year:</label>
 	                  <input type="text" class="form-control" id="Department" placeholder="example: 2018/2019 or 2018S1 etc.." name="acyear">
+                    <label for="group">Semister:</label>
+                    <input type="text" class="form-control" id="Semister" placeholder="example: 1" name="semister">
                     <input type="checkbox" name="level"> Level Up 
 	              </div>
 	              <br>
@@ -49,12 +51,13 @@
     @foreach($acyears as $v)
     <div class="container" style="width:80%;display: none;" id="f{{$v->id}}">
         <div class="card-body">
-            <form action="/admin/editac" method="post">
+            <form action="/admin/editac/{{$v->id}}" method="post">
               @csrf
                 <div class="form-Department">
                     <label for="group">Academic Year:</label>
-                    <input type="text" class="form-control" id="Department" placeholder="example: 2018/2019 or 2018S1 etc.." name="acyear" value="{{$v->year}}">
-                    <input type="text" name="yid" value="{{$v->id}}" hidden>
+                    <input type="text" class="form-control" placeholder="example: 2018/2019 or 2018S1 etc.." name="acyear" value="{{$v->year}}">
+                    <label for="group">Semister:</label>
+                    <input type="text" class="form-control" placeholder="example: 1" name="semister" value="{{$v->semister}}">
                     <input type="checkbox" name="level" {{$v->level_up==1?'checked':''}}> Level Up
                 </div>
                 <br>
@@ -68,9 +71,9 @@
           <div class="form-Department">
               <label for="group">Select To Edit:</label>
               <select class="form-control" id="sel">
-                <option value="">Academic Year</option>
+                <option value="">Academic Year || Semister</option>
                 @foreach($acyears as $v)
-                <option value="{{$v->id}}">{{$v->year}}</option>
+                <option value="{{$v->id}}">{{$v->year}} || {{$v->semister}}</option>
                 @endforeach
               </select>
           </div>

@@ -16,6 +16,17 @@ Route::get('/about','router@about');
 Route::get('/departments','router@departments');
 Route::get('/out','Auth\LoginController@logout');
 
+//Login
+Route::get('/login/admin', 'Auth\LoginController@getAdminlogin');
+Route::get('/login/doctor', 'Auth\LoginController@getDoctorlogin');
+Route::get('/login/assistant', 'Auth\LoginController@getAssistantlogin');
+Route::get('/login/student', 'Auth\LoginController@getStudentlogin');
+
+Route::post('/login/admin', 'Auth\LoginController@adminLogin');
+Route::post('/login/doctor', 'Auth\LoginController@doctorLogin');
+Route::post('/login/assistant', 'Auth\LoginController@assistantLogin');
+Route::post('/login/student', 'Auth\LoginController@studentLogin');
+
 //Admin DB
 Route::get('/admin','adminrouter@index');
 //Admin Department
@@ -23,7 +34,7 @@ Route::get('/admin/newdeb','adminrouter@newdeb');
 Route::post('/admin/adddeb','adminprocess@adddep');
 Route::get('/admin/editdeb','adminrouter@editdeb');
 Route::get('/admin/editdeb/{did}','adminrouter@editdebd');
-Route::post('/admin/editdeb','adminprocess@editdeb');
+Route::post('/admin/editdeb/{did}','adminprocess@editdeb');
 //Admin Places
 Route::get('/admin/newpla','adminrouter@newpla');
 Route::post('/admin/addpla','adminprocess@addpla');
@@ -54,7 +65,7 @@ Route::post('/admin/editassis/{aid}','adminprocess@editassis');
 //Admin Academic Config
 Route::get('/admin/acyear','adminrouter@acyear');
 Route::post('/admin/addac','adminprocess@addac');
-Route::post('/admin/editac','adminprocess@editac');
+Route::post('/admin/editac/{id}','adminprocess@editac');
 //Admin Group
 Route::get('/admin/addgroup','adminrouter@addgroup');
 Route::post('/admin/addgroup','adminprocess@addgroup');

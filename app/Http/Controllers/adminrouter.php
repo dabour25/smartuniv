@@ -7,7 +7,6 @@ use Auth;
 use Hash;
 use View;
 //DB Models
-use App\Users;
 use App\Departments;
 use App\Places;
 use App\Acyear;
@@ -15,15 +14,15 @@ use App\Groups;
 use App\Sections;
 use App\Courses;
 use App\Prerequest;
-use App\Studata;
+use App\Students;
 use App\Syssta;
 use App\Stucou;
 use App\Messages;
 use App\Uidata;
 use App\Periods;
 use App\Warnings;
-use App\Docdata;
-use App\Assisdata;
+use App\Doctors;
+use App\Assistants;
 use App\Cousch;
 use App\Experiod;
 use App\Extable;
@@ -32,25 +31,17 @@ use App\Stuhis;
 class adminrouter extends Controller
 {
     public function __construct(){
-       $this->middleware('auth');
-       $this->middleware(function ($request, $next) {
-            $role = Auth::user()->role;
-            if($role!='sadmin'&&$role!='admin'){
-                return redirect('/');
-            }else{
-                return $next($request);
-            }
-        });
+       $this->middleware('auth:admin');
        $messagescount = Messages::where('seen',0)->count();
        $syssta=Syssta::where('id',1)->first();
-       $unreg=(Studata::where('level','<',5)->count())-(Stucou::distinct()->count(['st_id']));
+       $unreg=(Students::where('level','<',5)->count())-(Stucou::distinct()->count(['student_id']));
        View::share('messagescount', $messagescount);
        View::share('syssta', $syssta);
        View::share('unreg', $unreg);
    }
    public function index(){
-    $doctor=Docdata::all();
-    $inst=Assisdata::all();
+    $doctor=Doctors::all();
+    $inst=Assistants::all();
     $courses=Courses::all();
     $unlinkcd=$unlinkca=0;
     foreach ($courses as $c) {
@@ -145,9 +136,9 @@ class adminrouter extends Controller
     return view('admin/addgroup')->withAcyears($acyears)->withDeps($deps);
    }
    public function editgroup(){
-    $groups=Groups::join('departments','departments.id','=','groups.department')
-    ->join('academic_year','academic_year.id','=','groups.year')
-    ->select('groups.*','academic_year.year as acyear','departments.dep_name')->get();
+    $groups=Groups::join('departments','departments.id','=','groups.department_id')
+    ->join('academic_year','academic_year.id','=','groups.academic_year')
+    ->select('groups.*','academic_year.year as acyear','academic_year.semister','departments.name as dep_name')->get();
     return view('admin/editgroup')->withGroups($groups);
    }
    public function addsec(){
@@ -169,14 +160,14 @@ class adminrouter extends Controller
   $acyear=$req->input('acyear');
   $dep=$req->input('dep');
   $level=$req->input('level');
-  $groups=Groups::where('year',$acyear)->where('department',$dep)->where('level',$level)->get();
+  $groups=Groups::where('academic_year',$acyear)->where('department_id',$dep)->where('level',$level)->get();
   return view('admin/addsec')->withGroups($groups);
    }
    public function editsec(){
     $sections=Sections::join('groups','groups.id','=','sections.group_id')
-    ->join('departments','departments.id','=','groups.department')
-    ->join('academic_year','academic_year.id','=','groups.year')
-    ->select('sections.*','academic_year.year as acyear','departments.dep_name','groups.group_name','groups.level')
+    ->join('departments','departments.id','=','groups.department_id')
+    ->join('academic_year','academic_year.id','=','groups.academic_year')
+    ->select('sections.*','academic_year.year as acyear','departments.name as dep_name','groups.group_name','groups.level')
     ->get();
     return view('admin/editsec')->withGroups($sections);
    }

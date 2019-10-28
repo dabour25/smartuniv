@@ -37,7 +37,7 @@ use App\Absence;
 class doctorrouter extends Controller
 {
     public function __construct(){
-       $this->middleware('auth');
+       $this->middleware('auth:doctor,assistant');
        $this->middleware(function ($request, $next) {
             $role = Auth::user()->role;
             if($role!='doctor'&&$role!='assistant'){

@@ -25,7 +25,6 @@ class CreateCourseScheduleTable extends Migration
 			$table->bigInteger('place_id', false, true);
 			$table->bigInteger('section_id', false, true);
 			
-			$table->foreign('instructor_id')->references('id')->on('users');
 			$table->foreign('course_id')->references('id')->on('courses');
 			$table->foreign('period_id')->references('id')->on('periods');
 			$table->foreign('place_id')->references('id')->on('places');

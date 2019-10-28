@@ -23,7 +23,7 @@ class CreateQuizTable extends Migration
 			$table->bigInteger('doctor_id', false, true);
 			
 			$table->foreign('course_id')->references('id')->on('courses');
-			$table->foreign('doctor_id')->references('id')->on('users');
+			$table->foreign('doctor_id')->references('id')->on('doctors');
             
         });
     }

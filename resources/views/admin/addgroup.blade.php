@@ -36,9 +36,9 @@
                 <div class="dropdown">
                     <label for="form">Department</label>
                     <br>
-                    <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" name="dep">
+                    <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" name="department">
                         @foreach($deps as $v)
-                        <option value="{{$v->id}}">{{$v->dep_name}}</option>
+                        <option value="{{$v->id}}">{{$v->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -47,7 +47,7 @@
                     <br>
                     <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" name="acyear">
                         @foreach($acyears as $v)
-                        <option value="{{$v->id}}">{{$v->year}}</option>
+                        <option value="{{$v->id}}">{{$v->year}} || {{$v->semister}}</option>
                         @endforeach
                     </select>
                 </div>

@@ -21,10 +21,10 @@ class CreateDriveTable extends Migration
 			$table->text('link');
 			$table->tinyInteger('tpye', false, true);
 			$table->bigInteger('course_id', false, true);
-			$table->bigInteger('instructor_id', false, true);
+			$table->bigInteger('doctor_id', false, true);
 			
 			$table->foreign('course_id')->references('id')->on('courses');
-			$table->foreign('instructor_id')->references('id')->on('users');
+			$table->foreign('doctor_id')->references('id')->on('doctors');
         });
     }
 

@@ -36,7 +36,9 @@
 	          	@csrf
 	            <div class="form-Department">
 	                <label for="group">Section Name:</label>
-	                <input type="text" class="form-control" placeholder="example: Sec 1" name="section" value="{{$section->section}}">
+	                <input type="text" class="form-control" placeholder="example: Sec 1" name="section" value="{{$section->section_name}}">
+                    <label for="group">Section Capacity:</label>
+                    <input type="text" class="form-control" placeholder="example: Sec 1" name="capacity" value="{{$section->cap}}">
 	            </div>
 	              <br>
 	              <button type="submit" class="btn btn-success">Edit</button>
@@ -67,7 +69,7 @@
                         @foreach($groups as $n=>$v)
                         <tr>
                             <td>{{$n+1}}</td>
-                            <td><a href="/admin/editsec/{{$v->id}}">{{$v->section}}</a></td>
+                            <td><a href="/admin/editsec/{{$v->id}}">{{$v->section_name}}</a></td>
                             <td>
                                 @for($i=0;$i<5;$i++)
                                 @if($v->level==$i)

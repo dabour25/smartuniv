@@ -36,7 +36,7 @@
 	          	@csrf
 	            <div class="form-Department">
 	                <label for="group">Group Name:</label>
-	                <input type="text" class="form-control" id="Department" placeholder="example: Group A" name="group" value="{{$group->group_name}}">
+	                <input type="text" class="form-control" placeholder="example: Group A" name="group" value="{{$group->group_name}}">
 	            </div>
                 <div class="dropdown">
                     <label for="form">Level/Year</label>
@@ -85,7 +85,7 @@
                                 @endfor
                             </td>
                             <td>{{$v->dep_name}}</td>
-                            <td>{{$v->acyear}}</td>
+                            <td>{{$v->acyear}} || {{$v->semister}}</td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -32,12 +32,11 @@
     @if(isset($did))
 	  <div class="container" style="width:80%">
 	      <div class="card-body">
-	          <form action="/admin/editdeb" method="post">
+	          <form action="/admin/editdeb/{{$did}}" method="post">
 	          	@csrf
 	              <div class="form-Department">
 	                  <label for="group">Department Name</label>
-	                  <input type="text" class="form-control" id="Department" placeholder="example: Computer" name="department" value="{{$didata->dep_name}}">
-                      <input type="text" name="did" value="{{$did}}" hidden>
+	                  <input type="text" class="form-control" id="Department" placeholder="example: Computer" name="department" value="{{$didata->name}}">
 	              </div>
 	              <br>
 	              <button type="submit" class="btn btn-primary">Edit Department</button>
@@ -59,7 +58,7 @@
                 @foreach($deps as $n=>$v)
                 <tr>
                     <td>{{$n+1}}</td>
-                    <td><a href="/admin/editdeb/{{$v->id}}">{{$v->dep_name}}</a></td>
+                    <td><a href="/admin/editdeb/{{$v->id}}">{{$v->name}}</a></td>
                 </tr>
                 @endforeach
             </tbody>

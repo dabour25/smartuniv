@@ -13,7 +13,7 @@
     <link href="{{asset('css/stylehome.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/chat.css')}}" rel="stylesheet" type="text/css">
 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
@@ -21,7 +21,7 @@
         
     <div class="row">
         <div class="logo col-md-4">
-        <img src="{{asset('images/logo.png')}}">
+        <a href="/"><img src="{{asset('images/logo.png')}}"></a>
         </div>
             
     <ul class="main-nav col-md-8">    
@@ -29,19 +29,31 @@
         <li {{$page_name=="ABOUT"?"class=active":''}}><a href="/about"> ABOUT US </a></li>
         <li {{$page_name=="DEPARTMENTS"?"class=active":''}}><a href="/departments"> DEPARTMENTS </a></li>
         <li {{$page_name=="CONTACT"?"class=active":''}}><a href="/contact"> CONTACT US </a></li>
-        @if(!Auth::check())
-        <li><a href="/login"> LOGIN </a></li>
-        @else
-        @if(Auth::user()->role=='admin'||Auth::user()->role=='sadmin')
-        <li><a href="/admin">ADMIN DB </a></li>
-        @elseif(Auth::user()->role=='student')
-        <li><a href="/student">STUDENT</a></li>
-        @elseif(Auth::user()->role=='doctor'||Auth::user()->role=='assistant')
-        <li><a href="/doctor">DOCTOR DB </a></li>
-        @endif
-        <li><a href="/out">LOGOUT</a></li>
-        @endif
-        
+        <li style="cursor: pointer;">
+            <div class="dropdown">
+              <a type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                PROFILE <i class="fa fa-angle-double-down"></i>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @if(!Auth::guard('admin')->check()&&!Auth::guard('student')->check()&&!Auth::guard('assistant')->check()&&!Auth::guard('doctor')->check())
+                <a class="submenu" href="/login/student">Student</a>
+                <a class="submenu" href="/login/assistant">Assistant</a>
+                <a class="submenu" href="/login/doctor">Doctor</a>
+                @else
+                @if(Auth::guard('admin'))
+                <a class="submenu" href="/admin">Admin db</a>
+                @elseif(Auth::guard('student'))
+                <a class="submenu" href="/student">Student db</a>
+                @elseif(Auth::guard('assistant'))
+                <a class="submenu" href="/doctor">Doctor db</a>
+                @elseif(Auth::guard('assistant'))
+                <a class="submenu" href="/doctor">Assistant db</a>
+                @endif
+                <a class="submenu" href="/out">Logout</a>
+                @endif
+              </div>
+            </div>
+        </li>
     </ul>    
         
     </div>

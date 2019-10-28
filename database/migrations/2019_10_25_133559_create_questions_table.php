@@ -24,8 +24,8 @@ class CreateQuestionsTable extends Migration
 			$table->bigInteger('doctor_id', false, true)->nullable();
 			$table->bigInteger('course_id', false, true);
 			
-			$table->foreign('student_id')->references('id')->on('users');
-			$table->foreign('doctor_id')->references('id')->on('users');
+			$table->foreign('student_id')->references('id')->on('students');
+			$table->foreign('doctor_id')->references('id')->on('doctors');
 			$table->foreign('course_id')->references('id')->on('courses');
         });
     }

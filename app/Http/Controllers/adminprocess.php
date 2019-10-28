@@ -8,7 +8,7 @@ use Session;
 use Auth;
 use Hash;
 //DB Models
-use App\Users;
+use App\Admins;
 use App\Departments;
 use App\Places;
 use App\Acyear;
@@ -16,15 +16,15 @@ use App\Groups;
 use App\Sections;
 use App\Courses;
 use App\Prerequest;
-use App\Studata;
+use App\Students;
 use App\Syssta;
 use App\Stucou;
 use App\Messages;
 use App\Uidata;
 use App\Periods;
 use App\Warnings;
-use App\Docdata;
-use App\Assisdata;
+use App\Doctors;
+use App\Assistants;
 use App\Cousch;
 use App\Experiod;
 use App\Extable;
@@ -34,35 +34,34 @@ use App\Absence;
 class adminprocess extends Controller
 {
     public function __construct(){
-  	    $this->middleware('auth');
+  	    $this->middleware('auth:admin');
   	}
   	public function adddep(Request $req){
   		$valarr=[
-	       'department'=>'required|unique:departments,dep_name'
+	       'department'=>'required|unique:departments,name'
 	    ];
 	    $this->validate($req,$valarr);
 	    $dname=$req->input('department');
-	    Departments::insert(['dep_name'=>$dname]);
+	    Departments::insert(['name'=>$dname]);
 	    session()->push('m','success');
-	    	    session()->push('m','Department has been added successfully!');
+	   	session()->push('m','Department has been added successfully!');
   		return back();
   	}
-  	public function editdeb(Request $req){
-  		$did=$req->input('did');
+  	public function editdeb(Request $req,$did){
   		$chk=Departments::where('id',$did)->first();
   		if(empty($chk)){
   			return redirect('/admin/editdeb');
   		}
   		if($chk->dep_name!=$req->input('department')){
 	  		$valarr=[
-		       'department'=>'required|unique:departments,dep_name'
+		       'department'=>'required|unique:departments,name'
 		    ];
 		    $this->validate($req,$valarr);
 		}
 	    $dname=$req->input('department');
-	    Departments::where('id',$did)->update(['dep_name'=>$dname]);
+	    Departments::where('id',$did)->update(['name'=>$dname]);
 	    session()->push('m','success');
-	    session()->push('m','Department has been updated successfully!');
+	    session()->push('m','Department ('.$chk->name.') has been updated successfully!');
 
   		return back();
   	}
@@ -190,54 +189,58 @@ class adminprocess extends Controller
   	}
   	public function addac(Request $req){
   		$valarr=[
-		    'acyear'=>'required|unique:academic_year,year'
+		    'acyear'=>'required|unique:academic_year,year|max:30',
+		    'semister'=>'required|max:30',
 		];
 		$this->validate($req,$valarr);
 		$acyear=$req->input('acyear');
+		$semister=$req->input('semister');
 		$level=$req->input('level');
 		$lvl=0;
 		if($level){
 			$lvl=1;
 		}
-		Acyear::insert(['year'=>$acyear,'level_up'=>$lvl]);
+		Acyear::insert(['year'=>$acyear,'semister'=>$semister,'level_up'=>$lvl]);
 		session()->push('m','success');
-	    	    session()->push('m','New academic_year has been added successfully!');
+	    session()->push('m','New academic year has been added successfully!');
 		return back();
   	}
-  	public function editac(Request $req){
-  		$olddata=Acyear::where('id',$req->input('yid'))->first();
+  	public function editac(Request $req,$id){
+  		$olddata=Acyear::where('id',$id)->first();
   		if(empty($olddata)){
   			return redirect('/admin/acyear');
   		}elseif($olddata->year!=$req->input('acyear')){
 	  		$valarr=[
-			    'acyear'=>'required|unique:academic_year,year'
+			    'acyear'=>'required|unique:academic_year,year|max:30',
+			    'semister'=>'required|max:30',
 			];
 			$this->validate($req,$valarr);
 		}
 		$acyear=$req->input('acyear');
+		$semister=$req->input('semister');
 		$level=$req->input('level');
 		$lvl=0;
 		if($level){
 			$lvl=1;
 		}
-		Acyear::where('id',$req->input('yid'))->update(['year'=>$acyear,'level_up'=>$lvl]);
+		Acyear::where('id',$id)->update(['year'=>$acyear,'semister'=>$semister,'level_up'=>$lvl]);
 		session()->push('m','success');
-	    	    session()->push('m','New Academic Year has been updated successfully!');
+	    	    session()->push('m','Academic Year ('.$olddata->year.') has been updated successfully!');
 		return back();
   	}
   	public function addgroup(Request $req){
   		$valarr=[
 		    'acyear'=>'required|exists:academic_year,id',
-		    'dep'=>'required|exists:departments,id',
+		    'department'=>'required|exists:departments,id',
 		    'group'=>'required|max:80',
 		    'level'=>'required',
 		];
 		$this->validate($req,$valarr);
 		$acyear=$req->input('acyear');
-		$dep=$req->input('dep');
+		$dep=$req->input('department');
 		$group=$req->input('group');
 		$level=$req->input('level');
-		Groups::insert(['group_name'=>$group,'department'=>$dep,'year'=>$acyear,'level'=>$level]);
+		Groups::insert(['group_name'=>$group,'department_id'=>$dep,'academic_year'=>$acyear,'level'=>$level]);
 		session()->push('m','success');
 	    	    session()->push('m','New group has been added successfully!');
 		return back();
@@ -245,14 +248,16 @@ class adminprocess extends Controller
   	public function addsec(Request $req){
   		$valarr=[
 		    'group'=>'required|exists:groups,id',
-		    'section'=>'required|max:80'
+		    'section'=>'required|max:80',
+		    'capacity'=>'required|numeric|max:1000',
 		];
 		$this->validate($req,$valarr);
 		$group=$req->input('group');
 		$section=$req->input('section');
-		Sections::insert(['group_id'=>$group,'section'=>$section]);
+		$cap=$req->input('capacity');
+		Sections::insert(['group_id'=>$group,'section_name'=>$section,'cap'=>$cap]);
 		session()->push('m','success');
-	    	    session()->push('m','New section has been added successfully!');
+	    session()->push('m','New section has been added successfully!');
 		return back();
   	}
   	public function editgroup(Request $req,$gid){
@@ -282,17 +287,27 @@ class adminprocess extends Controller
   	}
   	public function editsec(Request $req,$sid){
   		$valarr=[
-		    'section'=>'required|max:80'
+		    'section'=>'required|max:80',
+		    'capacity'=>'required|numeric|max:1000',
 		];
 		$this->validate($req,$valarr);
 		$section=$req->input('section');
-		Sections::where('id',$sid)->update(['section'=>$section]);
+		$cap=$req->input('capacity');
+		Sections::where('id',$sid)->update(['section_name'=>$section,'cap'=>$cap]);
 		session()->push('m','success');
 	    session()->push('m','Section has been updated successfully!');
 		return back();
   	}
   	public function remsec($sid){
-  		Sections::where('id',$sid)->delete();
+  		$chk=Stucou::where('section_id',$sid)->get();
+  		if(count($chk)>0){
+  			$error = \Illuminate\Validation\ValidationException::withMessages([
+			   'Sections' => ['This Section Related with Sections'],
+			]);
+			throw $error;
+  		}else{
+  			Sections::where('id',$sid)->delete();
+  		}
   		return back();
   	}
   	public function addcourse(Request $req){

@@ -35,7 +35,7 @@ use App\Absence;
 class doctorprocess extends Controller
 {
     public function __construct(){
-  	    $this->middleware('auth');
+  	    $this->middleware('auth:doctor,assistant');
   	}
   	public function question(Request $req){
       $valarr=[

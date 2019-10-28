@@ -40,7 +40,7 @@
                     <br>
                     <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" name="dep">
                         @foreach($deps as $v)
-                        <option value="{{$v->id}}">{{$v->dep_name}}</option>
+                        <option value="{{$v->id}}">{{$v->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -49,7 +49,7 @@
                     <br>
                     <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" name="acyear">
                         @foreach($acyears as $v)
-                        <option value="{{$v->id}}">{{$v->year}}</option>
+                        <option value="{{$v->id}}">{{$v->year}} || {{$v->semister}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -81,7 +81,9 @@
                 </div>
 	            <div class="form-Department">
 	                <label for="group">Section Name:</label>
-	                <input type="text" class="form-control" id="Department" placeholder="example: Sec 1" name="section">
+	                <input type="text" class="form-control" placeholder="example: Sec 1" name="section">
+                    <label for="group">Section Capacity:</label>
+                    <input type="text" class="form-control" placeholder="example: 30" name="capacity">
 	            </div>
 	              <br>
 	              <button type="submit" class="btn btn-success">Add New</button>

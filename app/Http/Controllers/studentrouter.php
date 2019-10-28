@@ -37,15 +37,7 @@ use App\Warnings;
 class studentrouter extends Controller
 {
     public function __construct(){
-       	$this->middleware('auth');
-	   	$this->middleware(function ($request, $next) {
-            $role = Auth::user()->role;
-            if($role!='student'){
-                return redirect('/');
-            }else{
-                return $next($request);
-            }
-        });
+       	$this->middleware('auth:student');
         $syssta=Syssta::where('id',1)->first();
         View::share('syssta', $syssta);
     }

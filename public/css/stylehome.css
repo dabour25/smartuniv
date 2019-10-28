@@ -27,13 +27,15 @@ body
 
 .main-nav li.active a
 {
-    border: 1px solid white;
+    border: 2px solid #bd7620;
+    border-radius: 5px;
     
 }
 
 .main-nav li a:hover
 {
-    border: 1px solid white;
+    border: 2px solid #dea157;
+    border-radius: 5px;
 }
 
 
@@ -62,9 +64,8 @@ body
     text-transform: uppercase;
     font-size: 50px;
     text-align: center;
-    margin-left:30%;
     margin-top: 150px;
-    
+    margin-left: 10%;  
 }
 .stitle
 {
@@ -72,7 +73,7 @@ body
     text-transform: uppercase;
     font-size: 30px;
     text-align: center;
-    margin-left: 130px;
+    margin-left: 5%;
     
 }
 header
@@ -84,7 +85,7 @@ header
 .button
 {
     margin-top: 30px;
-    margin-left: 440px;
+    margin-left: 40%;
 }
 
 .btn
@@ -170,4 +171,19 @@ header
 .clabel{
     color: white;
     font-size: 22px;
+}
+
+.submenu{
+	color: black !important;
+	display: block;
+}
+.submenu:hover{
+    color: #a2a2a2 !important;
+    border: none !important;
+}
+
+.dropdown-menu{
+	opacity:0.8;
+	background-color:#fff5e9;
+	border:1px solid #bd7620;
 }

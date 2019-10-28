@@ -7,7 +7,7 @@ use View;
 use Hash;
 use Auth;
 //DB Models
-use App\Users;
+//use App\Users;
 use App\Departments;
 use App\Places;
 use App\Acyear;
@@ -32,10 +32,6 @@ class router extends Controller
        View::share('uidata', $uidata);
    }
     public function index(){
-    	$chk=Users::where('id',1)->first();
-    	if(empty($chk)){
-    		Users::insert(['email'=>'admin@admin.com','password'=>Hash::make('Admin2019'),'rfid'=>'1','mobile_no'=>'00','role'=>'sadmin']);
-    	}
     	$page_name='HOME';
     	return view('welcome',compact('page_name'));
     }

@@ -23,8 +23,10 @@ class CreateStudentHistoryTable extends Migration
 			$table->smallInteger('final',false,true)->default(0);
 			$table->string('grade',2);
 			$table->bigInteger('academic_year', false, true);
+			$table->bigInteger('student_id', false, true);
             
 			$table->foreign('academic_year')->references('id')->on('academic_year');
+			$table->foreign('student_id')->references('id')->on('students');
         });
     }
 
