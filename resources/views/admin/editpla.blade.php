@@ -52,10 +52,6 @@
                   <label for="placecapacity">Capacity</label>
                   <input type="text" class="form-control" id="placecapacity" name="capacity" value="{{$place->capacity}}">
               </div>
-              <div class="form-capacity">
-                  <label for="placecapacity">Exam Capacity</label>
-                  <input type="text" class="form-control" id="placecapacity" name="examcapacity" value="{{$place->exam_capacity}}">
-              </div>
               <br>
               <button type="submit" class="btn btn-primary">Edit</button>
               <a href="/admin/editpla" class="btn btn-success">Back To Select</a>
@@ -87,7 +83,6 @@
                             <th>Name</th>
                             <th>Place Type</th>
                             <th>Capacity</th>
-                            <th>Exam Cap</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -107,7 +102,6 @@
                                 @endif
                             </td>
                             <td>{{$v->capacity}}</td>
-                            <td>{{$v->exam_capacity}}</td>
                         </tr>
                         @endforeach
                     </tbody>

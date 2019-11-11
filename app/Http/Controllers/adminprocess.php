@@ -69,14 +69,10 @@ class adminprocess extends Controller
   		$valarr=[
 	       'name'=>'required',
 	       'capacity'=>'required|integer',
-	       'examcapacity'=>'required|integer'
+	       'type'=>'required|integer',
 	    ];
 	    $this->validate($req,$valarr);
-	    $type=$req->input('type');
-	    $name=$req->input('name');
-	    $cap=$req->input('capacity');
-	    $excap=$req->input('examcapacity');
-	    Places::insert(['type'=>$type,'name'=>$name,'capacity'=>$cap,'exam_capacity'=>$excap]);
+	    Places::create($req->all());
 	    session()->push('m','success');
 	    session()->push('m','Place has been added successfully!');
   		return back();
@@ -89,14 +85,9 @@ class adminprocess extends Controller
   		$valarr=[
 	       'name'=>'required',
 	       'capacity'=>'required|integer',
-	       'examcapacity'=>'required|integer'
 	    ];
 	    $this->validate($req,$valarr);
-	    $type=$req->input('type');
-	    $name=$req->input('name');
-	    $cap=$req->input('capacity');
-	    $excap=$req->input('examcapacity');
-	    Places::where('id',$pid)->update(['type'=>$type,'name'=>$name,'capacity'=>$cap,'exam_capacity'=>$excap]);
+	    Places::findOrFail($pid)->update($req->all());
 	    session()->push('m','success');
 	    session()->push('m','Place has been updated successfully!');
 
@@ -106,37 +97,26 @@ class adminprocess extends Controller
   		Places::where('id',$pid)->delete();
   		return redirect('/admin/editpla');
   	}
-  	public function adduser(Request $req){
+  	public function adddoctor(Request $req){
   		$valarr=[
-	       'fname'=>'required|max:80',
-	       'mname'=>'required|max:80',
-	       'thname'=>'required|max:80',
-	       'lname'=>'required|max:80',
-	       'rfid'=>'unique:users,rfid|max:12',
-	       'birthdate'=>'required',
-	       'mobile'=>'required|min:10|max:20',
-	       'email'=>'required|email|min:5|max:60|unique:users,email',
-	       'password'=>'required|min:8|max:20|regex:/[A-z]*[0-9]+[A-z]*/'
+	       'first_name'=>'required|max:80',
+	       'middle_name'=>'required|max:80',
+	       'last_name'=>'required|max:80',
+	       'mobile_no'=>'required|min:10|max:20',
+	       'email'=>'required|email|min:5|max:60|unique:doctors,email',
+	       'password'=>'required|min:8|max:20|regex:/[A-z]*[0-9]+[A-z]*/',
+	       'department_id'=>'required|exists:departments,id',
 	    ];
 	    $this->validate($req,$valarr);
-	    $fname=$req->input('fname');
-	    $mname=$req->input('mname');
-	    $thname=$req->input('thname');
-	    $lname=$req->input('lname');
-	    $rfid=$req->input('rfid');
-	    $birthdate=$req->input('birthdate');
-	    $mobile=$req->input('mobile');
-	    $email=$req->input('email');
-	    $password=Hash::make($req->input('password'));
-	    $role=$req->input('role');
-	    Users::insert(['email'=>$email,'password'=>$password,'rfid'=>$rfid,'f_name'=>$fname,'m_name'=>$mname,'th_name'=>$thname,'l_name'=>$lname,'mobile_no'=>$mobile,'role'=>$role,'date_of_birth'=>$birthdate]);
-	    if($role=='student'){
+	    $req['password']=Hash::make($req['password']);
+	    Doctors::create($req->all());
+	    /*if($role=='student'){
 	    	$getid=Users::orderBy('id','desc')->first();
 	    	$acyear=Syssta::where('id',1)->first();
 	    	Studata::insert(['st_id'=>$getid->id,'ac_year'=>$acyear->ac_year]);
-	    }
+	    }*/
 	    session()->push('m','success');
-	    session()->push('m','User has been added successfully!');
+	    session()->push('m','Doctor has been added successfully!');
   		return back();
   	}
   	public function edituser(Request $req,$uid){

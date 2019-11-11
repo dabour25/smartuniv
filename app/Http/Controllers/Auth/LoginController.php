@@ -61,8 +61,13 @@ class LoginController extends Controller
         if (Auth::guard('admin')->attempt(['email' => $req->email, 'password' => $req->password], $req->get('remember'))) {
 
             return redirect('/admin');
+        }else{
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+               'login' => ['Error in Email or Password'],
+            ]);
+            throw $error;
         }
-        return back()->withInput($request->only('email', 'remember'));
+        return back()->withInput($req->only('email', 'remember'));
     }
 	public function doctorLogin(Request $request)
     {
@@ -74,8 +79,13 @@ class LoginController extends Controller
         if (Auth::guard('doctor')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
             return redirect()->intended('/doctor');
+        }else{
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+               'login' => ['Error in Email or Password'],
+            ]);
+            throw $error;
         }
-        return back()->withInput($request->only('email', 'remember'));
+        return back()->withInput($req->only('email', 'remember'));
     }
 	public function assistantLogin(Request $request)
     {
@@ -87,8 +97,13 @@ class LoginController extends Controller
         if (Auth::guard('assistant')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
             return redirect()->intended('/doctor');
+        }else{
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+               'login' => ['Error in Email or Password'],
+            ]);
+            throw $error;
         }
-        return back()->withInput($request->only('email', 'remember'));
+        return back()->withInput($req->only('email', 'remember'));
     }
 	public function studentLogin(Request $request)
     {
@@ -100,8 +115,13 @@ class LoginController extends Controller
         if (Auth::guard('student')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
             return redirect()->intended('/student');
+        }else{
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+               'login' => ['Error in Email or Password'],
+            ]);
+            throw $error;
         }
-        return back()->withInput($request->only('email', 'remember'));
+        return back()->withInput($req->only('email', 'remember'));
     }
 
     /**

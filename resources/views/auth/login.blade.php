@@ -29,7 +29,7 @@
     <form class="form" action="/login/{{isset($url)?$url:''}}" method="post">
         @csrf
         <label> Email: </label>
-        <input type="text" name="email" class="form-control">
+        <input type="text" name="email" class="form-control" value="{{old('email')}}">
         <br>
         <label>Password:</label>
         <input type="password" name="password" class="form-control">

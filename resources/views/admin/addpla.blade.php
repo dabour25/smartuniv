@@ -52,10 +52,6 @@
                   <label for="placecapacity">Capacity</label>
                   <input type="text" class="form-control" id="placecapacity" name="capacity">
               </div>
-              <div class="form-capacity">
-                  <label for="placecapacity">Exam Capacity</label>
-                  <input type="text" class="form-control" id="placecapacity" name="examcapacity">
-              </div>
               <br>
               <button type="submit" class="btn btn-success">Add New</button>
             </form>

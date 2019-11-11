@@ -28,87 +28,89 @@ Route::post('/login/assistant', 'Auth\LoginController@assistantLogin');
 Route::post('/login/student', 'Auth\LoginController@studentLogin');
 
 //Admin DB
-Route::get('/admin','adminrouter@index');
-//Admin Department
-Route::get('/admin/newdeb','adminrouter@newdeb');
-Route::post('/admin/adddeb','adminprocess@adddep');
-Route::get('/admin/editdeb','adminrouter@editdeb');
-Route::get('/admin/editdeb/{did}','adminrouter@editdebd');
-Route::post('/admin/editdeb/{did}','adminprocess@editdeb');
-//Admin Places
-Route::get('/admin/newpla','adminrouter@newpla');
-Route::post('/admin/addpla','adminprocess@addpla');
-Route::get('/admin/editpla','adminrouter@editpla');
-Route::get('/admin/editpla/search/{sr}','adminrouter@editplas');
-Route::get('/admin/editpla/{pid}','adminrouter@editplap');
-Route::post('/admin/editpla/{pid}','adminprocess@editpla');
-Route::get('/admin/rempla/{pid}','adminprocess@rempla');
-//Admin Users
-Route::get('/admin/newuser','adminrouter@newuser');
-Route::post('/admin/adduser','adminprocess@adduser');
-Route::get('/admin/edituser','adminrouter@edituser');
-Route::get('/admin/edituser/search/{sr}','adminrouter@editusers');
-Route::get('/admin/edituser/{uid}','adminrouter@edituseru');
-Route::post('/admin/edituser/{uid}','adminprocess@edituser');
-Route::get('/admin/editstu','adminrouter@editstu');
-Route::get('/admin/editstu/search/{s}','adminrouter@editstus');
-Route::get('/admin/editstu/{sid}','adminrouter@editstusd');
-Route::post('/admin/editstu/{sid}','adminprocess@editstu');
-Route::get('/admin/editdoc','adminrouter@editdoc');
-Route::get('/admin/editdoc/search/{s}','adminrouter@editdocs');
-Route::get('/admin/editdoc/{did}','adminrouter@editdocd');
-Route::post('/admin/editdoc/{did}','adminprocess@editdoc');
-Route::get('/admin/editassis','adminrouter@editassis');
-Route::get('/admin/editassis/search/{s}','adminrouter@editassiss');
-Route::get('/admin/editassis/{aid}','adminrouter@editassisd');
-Route::post('/admin/editassis/{aid}','adminprocess@editassis');
-//Admin Academic Config
-Route::get('/admin/acyear','adminrouter@acyear');
-Route::post('/admin/addac','adminprocess@addac');
-Route::post('/admin/editac/{id}','adminprocess@editac');
-//Admin Group
-Route::get('/admin/addgroup','adminrouter@addgroup');
-Route::post('/admin/addgroup','adminprocess@addgroup');
-Route::get('/admin/editgroup','adminrouter@editgroup');
-Route::get('/admin/editgroup/{gid}','adminrouter@editgroupg');
-Route::post('/admin/editgroup/{gid}','adminprocess@editgroup');
-Route::get('/admin/remgrp/{gid}','adminprocess@remgrp');
-//Admin Sections
-Route::get('/admin/addsec','adminrouter@addsec');
-Route::get('/admin/selsec','adminrouter@selsecerr'); //Handle Refresh
-Route::post('/admin/selsec','adminrouter@selsec');
-Route::post('/admin/addsec','adminprocess@addsec');
-Route::get('/admin/editsec','adminrouter@editsec');
-Route::get('/admin/editsec/{sid}','adminrouter@editsecs');
-Route::post('/admin/editsec/{sid}','adminprocess@editsec');
-Route::get('/admin/remsec/{sid}','adminprocess@remsec');
-//Admin Periods
-Route::get('/admin/periods','adminrouter@periods');
-Route::get('/admin/editperiod/{pid}','adminrouter@editperiod');
-Route::post('/admin/addperiod','adminprocess@addperiod');
-Route::post('/admin/editperiod/{pid}','adminprocess@editperiod');
-//Admin Warnings
-Route::get('/admin/warnings','adminrouter@warnings');
-Route::get('/admin/editwarning/{wid}','adminrouter@editwarning');
-Route::post('/admin/addwarning','adminprocess@addwarning');
-Route::post('/admin/editwarning/{wid}','adminprocess@editwarning');
-//Admin Registeration
-Route::get('/admin/addcourse','adminrouter@addcourse');
-Route::post('/admin/addcourse','adminprocess@addcourse');
-Route::get('/admin/editcourse','adminrouter@editcourse');
-Route::get('/admin/editcourse/{couid}','adminrouter@editcoursec');
-Route::post('/admin/editcourse/{couid}','adminprocess@editcourse');
-Route::get('/admin/stureg','adminrouter@stureg');
-Route::post('/admin/stureg','adminrouter@sturegs');
-Route::post('/admin/sturegs/{sid}','adminprocess@sturegs');
-Route::get('/admin/edstureg','adminrouter@edstureg');
-Route::post('/admin/edstureg','adminrouter@edsturegs');
-Route::post('/admin/edsturegs/{sid}','adminprocess@edsturegs');
-//Admin Status
-Route::get('/admin/sysst','adminrouter@sysst');
-Route::post('/admin/sysst','adminprocess@sysst');
-//Admin Messages
-Route::get('/admin/messages','adminrouter@messages');
+Route::prefix('admin')->group(function () {
+	Route::get('/','adminrouter@index');
+	//Admin Department
+	Route::get('/newdeb','adminrouter@newdeb');
+	Route::post('/adddeb','adminprocess@adddep');
+	Route::get('/editdeb','adminrouter@editdeb');
+	Route::get('/editdeb/{did}','adminrouter@editdebd');
+	Route::post('/editdeb/{did}','adminprocess@editdeb');
+	//Admin Places
+	Route::get('/newpla','adminrouter@newpla');
+	Route::post('/addpla','adminprocess@addpla');
+	Route::get('/editpla','adminrouter@editpla');
+	Route::get('/editpla/search/{sr}','adminrouter@editplas');
+	Route::get('/editpla/{pid}','adminrouter@editplap');
+	Route::post('/editpla/{pid}','adminprocess@editpla');
+	Route::get('/rempla/{pid}','adminprocess@rempla');
+	//Admin Users
+	Route::get('/adddoctor','adminrouter@adddoctor');
+	Route::post('/adddoctor','adminprocess@adddoctor');
+	Route::get('/edituser','adminrouter@edituser');
+	Route::get('/edituser/search/{sr}','adminrouter@editusers');
+	Route::get('/edituser/{uid}','adminrouter@edituseru');
+	Route::post('/edituser/{uid}','adminprocess@edituser');
+	Route::get('/editstu','adminrouter@editstu');
+	Route::get('/editstu/search/{s}','adminrouter@editstus');
+	Route::get('/editstu/{sid}','adminrouter@editstusd');
+	Route::post('/editstu/{sid}','adminprocess@editstu');
+	Route::get('/editdoc','adminrouter@editdoc');
+	Route::get('/editdoc/search/{s}','adminrouter@editdocs');
+	Route::get('/editdoc/{did}','adminrouter@editdocd');
+	Route::post('/editdoc/{did}','adminprocess@editdoc');
+	Route::get('/editassis','adminrouter@editassis');
+	Route::get('/editassis/search/{s}','adminrouter@editassiss');
+	Route::get('/editassis/{aid}','adminrouter@editassisd');
+	Route::post('/editassis/{aid}','adminprocess@editassis');
+	//Admin Academic Config
+	Route::get('/acyear','adminrouter@acyear');
+	Route::post('/addac','adminprocess@addac');
+	Route::post('/editac/{id}','adminprocess@editac');
+	//Admin Group
+	Route::get('/addgroup','adminrouter@addgroup');
+	Route::post('/addgroup','adminprocess@addgroup');
+	Route::get('/editgroup','adminrouter@editgroup');
+	Route::get('/editgroup/{gid}','adminrouter@editgroupg');
+	Route::post('/editgroup/{gid}','adminprocess@editgroup');
+	Route::get('/remgrp/{gid}','adminprocess@remgrp');
+	//Admin Sections
+	Route::get('/addsec','adminrouter@addsec');
+	Route::get('/selsec','adminrouter@selsecerr'); //Handle Refresh
+	Route::post('/selsec','adminrouter@selsec');
+	Route::post('/addsec','adminprocess@addsec');
+	Route::get('/editsec','adminrouter@editsec');
+	Route::get('/editsec/{sid}','adminrouter@editsecs');
+	Route::post('/editsec/{sid}','adminprocess@editsec');
+	Route::get('/remsec/{sid}','adminprocess@remsec');
+	//Admin Periods
+	Route::get('/periods','adminrouter@periods');
+	Route::get('/editperiod/{pid}','adminrouter@editperiod');
+	Route::post('/addperiod','adminprocess@addperiod');
+	Route::post('/editperiod/{pid}','adminprocess@editperiod');
+	//Admin Warnings
+	Route::get('/warnings','adminrouter@warnings');
+	Route::get('/editwarning/{wid}','adminrouter@editwarning');
+	Route::post('/addwarning','adminprocess@addwarning');
+	Route::post('/editwarning/{wid}','adminprocess@editwarning');
+	//Admin Registeration
+	Route::get('/addcourse','adminrouter@addcourse');
+	Route::post('/addcourse','adminprocess@addcourse');
+	Route::get('/editcourse','adminrouter@editcourse');
+	Route::get('/editcourse/{couid}','adminrouter@editcoursec');
+	Route::post('/editcourse/{couid}','adminprocess@editcourse');
+	Route::get('/stureg','adminrouter@stureg');
+	Route::post('/stureg','adminrouter@sturegs');
+	Route::post('/sturegs/{sid}','adminprocess@sturegs');
+	Route::get('/edstureg','adminrouter@edstureg');
+	Route::post('/edstureg','adminrouter@edsturegs');
+	Route::post('/edsturegs/{sid}','adminprocess@edsturegs');
+	//Admin Status
+	Route::get('/sysst','adminrouter@sysst');
+	Route::post('/sysst','adminprocess@sysst');
+	//Admin Messages
+	Route::get('/messages','adminrouter@messages');
+});
 //Admin UI
 Route::get('/admin/ui','adminrouter@ui');
 Route::post('/admin/editui','adminprocess@editui');

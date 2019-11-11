@@ -103,8 +103,9 @@ class adminrouter extends Controller
     }
     return view('admin/editpla')->withPid($pid)->withPlace($pldata);
    }
-   public function newuser(){
-    return view('admin/adduser');
+   public function adddoctor(){
+    $departments=Departments::all();
+    return view('admin/adddoctor',compact('departments'));
    }
    public function edituser(){
     $users=Users::where('role','!=','sadmin')->paginate(20);

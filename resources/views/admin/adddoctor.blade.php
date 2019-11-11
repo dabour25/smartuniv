@@ -9,7 +9,7 @@
         <li class="breadcrumb-item">
           <a href="/admin">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Add New User</li>
+        <li class="breadcrumb-item active">Add New Doctor</li>
       </ol>
 
     <!-- Page Content -->
@@ -31,48 +31,37 @@
     @endif
 	<div class="container" style="width:80%">
 	   <div class="card-body">
-            <form action="/admin/adduser" method="post">
+            <form action="/admin/adddoctor" method="post">
                 @csrf
-                <div class="dropdown">
-                    <label for="form">Choose Type</label>
-                    <br>
-                    <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" name="role">
-                        <option value="admin">Admin</option>
-                        <option value="doctor">Doctor</option>
-                        <option value="assistant">Assistant</option>
-                        <option value="student">Student</option>
-                    </select>
-                </div>
                 <br>
                 <div class="form-name">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="fname" placeholder="First Name">
+                    <input type="text" class="form-control" id="name" name="first_name" placeholder="First Name" value="{{old('first_name')}}">
                     <br>
-                    <input type="text" class="form-control" id="name" name="mname" placeholder="Middle Name">
+                    <input type="text" class="form-control" id="name" name="middle_name" placeholder="Middle Name" value="{{old('middle_name')}}">
                     <br>
-                    <input type="text" class="form-control" id="name" name="thname" placeholder="Third Name">
-                    <br>
-                    <input type="text" class="form-control" id="name" name="lname" placeholder="Last Name">
-                </div>
-                <div class="form-id">
-                    <label for="id">RFID</label>
-                    <input type="text" class="form-control" id="id" name="rfid">
-                </div>
-                <div class="form-Age">
-                    <label for="placecapacity">Birth Date</label>
-                    <input type="date" class="form-control" id="Age" name="birthdate" value="2000-01-01">
+                    <input type="text" class="form-control" id="name" name="last_name" placeholder="Last Name" value="{{old('last_name')}}">
                 </div>
                 <div class="form-number">
                     <label for="placecapacity">Mobile Number</label>
-                    <input type="text" class="form-control" id="number" name="mobile">
+                    <input type="tel" class="form-control" id="number" name="mobile_no" value="{{old('mobile_no')}}">
                 </div>
                 <div class="form-email">
                     <label for="placecapacity">Email</label>
-                    <input type="text" class="form-control" id="email" name="email">
+                    <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}">
                 </div>
                 <div class="form-password">
                     <label for="placecapacity">Password</label>
-                    <input type="text" class="form-control" id="password" name="password">
+                    <input type="text" class="form-control" id="password" name="password" value="{{old('password')}}">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Department</label>
+                    <br>     
+                    <select aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" name="department_id">
+                      @foreach($departments as $d)
+                        <option value="{{$d->id}}" {{old('department_id')==$d->id?'selected':''}}>{{$d->name}}</option>
+                      @endforeach
+                    </select>
                 </div>
                 <br>
                 <button class="btn btn-success">Create User</button>

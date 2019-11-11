@@ -112,11 +112,13 @@
                   <span>Users</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                  <a class="dropdown-item" href="/admin/newuser">Add User</a>
-                  <a class="dropdown-item" href="/admin/edituser">Edit User</a>
-                  <a class="dropdown-item" href="/admin/editstu">Edit Student</a>
-                  <a class="dropdown-item" href="/admin/editdoc">Edit Doctor</a>
+                  <a class="dropdown-item" href="/admin/adddoctor">Add Doctor</a>
+                  <a class="dropdown-item" href="/admin/editdoctor">Edit Doctor</a>
+                  <a class="dropdown-item" href="/admin/addassis">Add Assistant</a>
                   <a class="dropdown-item" href="/admin/editassis">Edit Assistant</a>
+                  <a class="dropdown-item" href="/admin/addstudent">Add Student</a>
+                  <a class="dropdown-item" href="/admin/editstudent">Edit Student</a>
+                  <a class="dropdown-item" href="/admin/admincontrol">Admin Control</a>
               </div>
           </li>
           <li class="nav-item dropdown">
@@ -161,11 +163,14 @@
                   <i class="fas fa-file-word"></i>
                   <span>System UI</span>
               </a>
+          </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa fa-database"></i>
+                  <span>Reports</span>
+              </a>
               <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                  <a class="dropdown-item" href="/admin/addcourse">Add Course</a>
-                  @if($syssta->state==0)
-                  <a class="dropdown-item" href="/admin/stureg">Student Registeration</a>
-                  @endif
+                  <a class="dropdown-item" href="/admin/reports/courses">Courses</a>
               </div>
           </li>
       </ul>
